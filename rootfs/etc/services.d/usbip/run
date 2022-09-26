@@ -1,0 +1,13 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Add-on: USBIP Mounter
+# Start the usbipd daemon service
+# ==============================================================================
+
+# Wait for usbipd to become available
+s6-svwait -u -t 5000 /run/service/usbipd
+
+bashio::log.info "Attaching usbip devices"
+
+## Run the attach device script
+exec /usr/local/bin/mount_devices
