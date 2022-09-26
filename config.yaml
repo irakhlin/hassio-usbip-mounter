@@ -1,11 +1,13 @@
 name: USBIP Mounter
 slug: usbip
 startup: services
-usbip: true
-url: https://github.com/{replace}
+url: https://github.com/irakhlin/hassio-usbip-mounter
 panel_icon: mdi:usb
+usbip: true
 usb: true
 kernel_modules: true
+host_network: true
+apparmor: false
 version: 1.0.0
 description: USBIP Client Handler to attach USBIP devices to Hassio
 image: irakhlin/hassio-{arch}-usbip-mounter
@@ -16,6 +18,14 @@ arch:
 - armhf
 - armv7
 - i386
+privileged:
+  - NET_ADMIN
+  - SYS_ADMIN
+  - SYS_RAWIO
+  - SYS_TIME
+  - SYS_NICE
+devices:
+  - /dev/mem
 schema:
   devices:
     - server_address: match(^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$)

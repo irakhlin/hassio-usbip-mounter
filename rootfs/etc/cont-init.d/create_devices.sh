@@ -18,15 +18,19 @@ if ! bashio::fs.directory_exists "${script_directory}"; then
   mkdir -p "${script_directory}" || bashio::exit.nok "Could not create bin folder"
 fi
 
+if bashio::fs.file_exists "${mount_script}"; then
+  rm "${mount_script}"
+fi
+
 if ! bashio::fs.file_exists "${mount_script}"; then
   touch ${mount_script}
   chmod +x ${mount_script}
   echo '#!/command/with-contenv bashio' > "${mount_script}"
-  
+  echo 'set -x' >> "${mount_script}"
   for device in $(bashio::config 'devices|keys'); do
     server_address=$(bashio::config "devices[${device}].server_address")
     bus_id=$(bashio::config "devices[${device}].bus_id")
     bashio::log.info "Adding device from server ${server_address} on bus ${bus_id}"
-    echo "/usr/sbin/usbip attach -r ${server_address} -b ${bus_id}" >> "${mount_script}"
+    echo "/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id}" >> "${mount_script}"
   done
 fi

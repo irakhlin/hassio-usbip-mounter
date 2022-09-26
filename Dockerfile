@@ -8,7 +8,8 @@ ARG BUILD_ARCH=amd64
 RUN apk add --no-cache \
     kmod=29-r2 \
     linux-tools-usbip=5.15.35-r1 \
-    hwids-usb=20210613-r0
+    hwids-usb=20210613-r0 \
+    device-mapper-libs=2.02.187-r2
 
 # Copy root filesystem
 COPY rootfs /
