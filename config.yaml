@@ -12,6 +12,7 @@ version: 1.0.0
 description: USBIP Client Handler to attach USBIP devices to Hassio
 image: irakhlin/hassio-{arch}-usbip-mounter
 init: false
+full_access: true
 arch:
 - aarch64
 - amd64
