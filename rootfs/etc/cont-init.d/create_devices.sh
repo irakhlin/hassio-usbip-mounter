@@ -25,9 +25,9 @@ fi
 if ! bashio::fs.file_exists "${mount_script}"; then
   touch ${mount_script}
   chmod +x ${mount_script}
-  echo 'mount -o remount -t sysfs sysfs /sys' > "${mount_script}"
   echo '#!/command/with-contenv bashio' > "${mount_script}"
   echo 'set -x' >> "${mount_script}"
+  echo 'mount -o remount -t sysfs sysfs /sys' >> "${mount_script}"
   for device in $(bashio::config 'devices|keys'); do
     server_address=$(bashio::config "devices[${device}].server_address")
     bus_id=$(bashio::config "devices[${device}].bus_id")
