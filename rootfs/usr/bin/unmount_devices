@@ -1,0 +1,11 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Add-on: USBIP Mounter
+# Detach all attached devices
+# ==============================================================================
+declare -a ports
+readarray -t ports < <(usbip port | grep -oP '(^|\s)Port \K\w+')
+
+for port in ${ports[@]}; do
+  usbip detach -p $port
+done

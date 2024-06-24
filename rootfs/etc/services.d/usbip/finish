@@ -3,6 +3,10 @@
 # Home Assistant Add-on: USBIP Mounter
 # Take down the S6 supervision tree when usbip fails
 # ==============================================================================
+
+bashio::log.info "usbip stopping, detaching any attached devices..."
+/usr/bin/unmount_devices
+
 if [[ "${1}" -ne 0 ]] && [[ "${1}" -ne 256 ]]; then
   bashio::log.warning "usbip crashed, halting add-on"
   /run/s6/basedir/bin/halt
