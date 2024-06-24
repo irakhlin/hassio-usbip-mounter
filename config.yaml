@@ -8,7 +8,7 @@ usb: true
 kernel_modules: true
 host_network: true
 apparmor: false
-version: 1.1.0
+version: 1.4.0
 description: USBIP Client Handler to attach USBIP devices to Hassio
 init: false
 full_access: true
